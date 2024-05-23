@@ -14,6 +14,8 @@ export default class User extends Model {
   declare createdAt: Date;
 
   declare updatedAt: Date;
+
+  declare passwordChangedAt: Date;
 }
 
 const sequelizeConnection = SequelizeConnection.getInstance();
@@ -49,6 +51,10 @@ User.init(
     },
     updatedAt: {
       field: "updatedAt",
+      type: DataTypes.DATE,
+    },
+    passwordChangedAt: {
+      field: "passwordChangedAt",
       type: DataTypes.DATE,
     },
   },

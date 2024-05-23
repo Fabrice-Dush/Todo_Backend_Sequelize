@@ -11,6 +11,7 @@ module.exports = {
           password: string;
           createdAt: Date;
           updatedAt: Date;
+          passwordChangedAt: Date;
         }[]
       ) => any;
     },
@@ -25,6 +26,7 @@ module.exports = {
         password: "dush@2002",
         createdAt: new Date(),
         updatedAt: new Date(),
+        passwordChangedAt: new Date(),
       },
       {
         id: 2,
@@ -33,6 +35,7 @@ module.exports = {
         password: "saddock@2024",
         createdAt: new Date(),
         updatedAt: new Date(),
+        passwordChangedAt: new Date(),
       },
     ]);
   },

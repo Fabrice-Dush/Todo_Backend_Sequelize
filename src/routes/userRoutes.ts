@@ -6,8 +6,10 @@ import {
   signup,
   logout,
   getUsers,
+  updatePassword,
 } from "./../controllers/userController";
 import User from "../database/models/user";
+import { authenticate } from "../middleware/middleware";
 
 router.get("/", getUsers);
 router.delete("/", async (req: Request, res: Response) => {
@@ -23,6 +25,7 @@ router.delete("/", async (req: Request, res: Response) => {
 });
 router.post("/login", login);
 router.post("/signup", signup);
+router.patch("/updatePassword", authenticate, updatePassword);
 
 router.get("/logout", logout);
 

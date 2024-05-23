@@ -17,6 +17,7 @@ module.exports = {
           password: { type: string };
           createdAt: { allowNull: boolean; type: Date };
           updatedAt: { allowNull: boolean; type: Date };
+          passwordChangedAt: { allowNull: boolean; type: Date };
         }
       ) => any;
     },
@@ -43,6 +44,10 @@ module.exports = {
         type: Sequelize.DATE,
       },
       updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      passwordChangedAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },

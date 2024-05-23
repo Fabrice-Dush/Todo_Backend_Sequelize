@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 const SECRET: any = process.env.JWT_SECRET;
 
 const maxAge = 3 * 24 * 60 * 60;
+// const maxAge = 5;
 const generateToken = function (id: Number): String {
   const token = jwt.sign({ id }, SECRET, {
     expiresIn: maxAge,
@@ -53,6 +54,7 @@ export const signup = async function (
       password: hashedPassword,
       createdAt: new Date(),
       updatedAt: new Date(),
+      passwordChangedAt: new Date(),
     };
     const newUser = await User.create(user);
     const token = generateToken(newUser.id);
@@ -102,5 +104,25 @@ export const getUsers = async function (
       message: "error getting users",
       errors: err,
     });
+  }
+};
+
+export const updatePassword = async function (req: Request, res: Response) {
+  try {
+    const { password } = req.body;
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const { id } = req.body.authenticatedUser;
+    const updatedUser = await User.update(
+      { password: hashedPassword, passwordChangedAt: new Date() },
+      { where: { id } }
+    );
+    res.status(200).json({
+      ok: true,
+      status: "success",
+      message: "User password updated successfully",
+    });
+  } catch (err: any) {
+    res.status(500).json({ ok: false, status: "fail", message: err.message });
   }
 };

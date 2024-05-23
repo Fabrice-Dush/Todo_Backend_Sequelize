@@ -77,6 +77,7 @@ export const getTodos = async function (
       data: todos,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       ok: false,
       status: "fail",
